@@ -19,7 +19,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -86,5 +85,9 @@ public class RoleService {
         user.getUserRoles().remove(role);
         return ResponseEntity.ok(UserMapper.toDTO(userRepository.save(user)));
 
+    }
+
+    public Role getByName(RoleType name) {
+        return roleRepository.findByName(name).orElseThrow();
     }
 }
