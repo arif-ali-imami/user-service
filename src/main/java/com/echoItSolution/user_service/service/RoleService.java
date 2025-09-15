@@ -17,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -52,6 +53,8 @@ public class RoleService {
         return ResponseEntity.ok(roleRepository.save(role));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasAuthority('ASSIGN_ROLE')")
     public ResponseEntity<UserDTO> assignRoleToUser(AssignRoleRequestDTO request) {
         User user = userRepository.findById(request.getUserId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
