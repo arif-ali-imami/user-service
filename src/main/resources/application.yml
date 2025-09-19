@@ -12,3 +12,7 @@ logging:
   level:
     org.springframework.security: OFF
 
+rest:
+  client:
+    enabled: false
+
